@@ -59,5 +59,5 @@ function setTimer() {
         n++
         // n % size 取余，以达到循环效果
         playSilde(n % size)
-    }, 1666)
+    }, 2333)
 }
