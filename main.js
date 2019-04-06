@@ -55,9 +55,9 @@ function activeButton($button) {
 }
 
 function setTimer() {
-    return setInterval(function () {
+    return setInterval(() => {
         n++
         // n % size 取余，以达到循环效果
         playSilde(n % size)
-    }, 2333)
+    }, 2666)
 }
