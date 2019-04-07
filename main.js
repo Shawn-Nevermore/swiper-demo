@@ -28,7 +28,7 @@ var timerId = setTimer()
 
 // 鼠标移入，轮播中止，“砸掉闹钟”
 $('.window').on('mouseenter', function () {
-    $('.window').css('cursor', 'pointerw')
+    $('.window').css('cursor', 'pointer')
     window.clearInterval(timerId)
 })
 
