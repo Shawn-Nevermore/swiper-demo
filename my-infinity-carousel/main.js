@@ -1,28 +1,51 @@
-$('.images > img:nth-child(1)').addClass('current')
-$('.images > img:nth-child(2)').addClass('enter')
+let n   // 自增变量
 
-let imgCount = $('.images>img').length
+init()
 
-let n = 1
 setInterval(() => {
 
-    $(`.images > img:nth-child(${x(n)})`).removeClass('current').addClass('leave')
-        .one('transitionend', (e) => {    // 这里用on会出现bug，即每次transition完都会添加.enter类，因此选择只执行一次
-            $(e.currentTarget).removeClass('leave').addClass('enter')
+    makeLeave(getImage(n))
+        // 这里用on会出现bug，即每次transition完都会添加.enter类，因此选择只执行一次
+        .one('transitionend', (e) => {
+            makeEnter($(e.currentTarget))
         })
-    $(`.images > img:nth-child(${x(n + 1)})`).removeClass('enter').addClass('current')
-    console.log(n + 1)
-
+    makeCurrent(getImage(n + 1))
     n++
+
 }, 1666);
 
+
+
+
+/*******************************封装函数************************************* */
+
+// 初始化
+function init() {
+    n = 1
+    $(`.images > img:nth-child(${n})`).addClass('current')
+        .siblings().addClass('enter')
+}
+
+// 控制n的范围在1~5之间循环
 function x(n) {
-    // return n = n > imgCount ? n%imgCount:n
-    if (n > imgCount) {
-        n %= imgCount
-        if (n === 0) {
-            n = imgCount
-        }
-    }
-    return n
+    let imgCount = $('.images>img').length
+    return n = n % imgCount === 0 ? imgCount : n % imgCount
+}
+
+// 获取当前图片
+function getImage(n) {
+    return $(`.images > img:nth-child(${x(n)})`)
+}
+
+
+// 状态机
+function makeCurrent($node) {
+    return $node.removeClass('leave enter').addClass('current')
+}
+
+function makeLeave($node) {
+    return $node.removeClass('current enter').addClass('leave')
+}
+function makeEnter($node) {
+    return $node.removeClass('leave current').addClass('enter')
 }
