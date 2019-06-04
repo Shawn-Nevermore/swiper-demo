@@ -1,1 +1,1 @@
-预览：uiao.info/swiper-demo/infinity-carousel
+预览：[uiao.info/swiper-demo/infinity-carousel](uiao.info/swiper-demo/infinity-carousel)
